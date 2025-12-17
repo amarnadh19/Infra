@@ -3,5 +3,5 @@ module "dev_ecr_repo" {
 }
 
 module "dev_vpc" {
-    source = "./vpc"
+    source = "./common"
 }

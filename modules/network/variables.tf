@@ -23,12 +23,6 @@ variable "env" {
    
 }
 
-variable "tier" {
-	description   = "Tier to specify whether ai/web"
-	type = string
-    
-}
-
 variable "cidrblock" {
 	type    = string
     default = ""
@@ -127,5 +121,3 @@ variable "orgShortName" {
 	type		=	string
 	default		=	"pf"
 }
-
-variable "tname" {}

@@ -13,22 +13,22 @@ resource "aws_route" "private_nat_gateway" {
 resource "aws_eip" "nat" {
   count = var.enable_nat_gateway ? 1 : 0
   domain = "vpc"
-  tags = merge (
-		{
-			Name = join("-", [var.tname,"system","eks","network",var.eip_tags,element(var.azs,count.index)])
-		},
-	)
+  # tags = merge (
+	# 	{
+	# 		Name = join("-", [var.tname,"system","eks","network",var.eip_tags,element(var.azs,count.index)])
+	# 	},
+	# )
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
   count         = var.enable_nat_gateway ? 1 : 0
   allocation_id = aws_eip.nat[0].id
   subnet_id     = aws_subnet.public[0].id # Placed in the first public subnet
-  tags = merge (
-		{
-		Name = join("-", [var.tname,"system","eks","network",var.nat_tags,element(var.azs,count.index)])
-		},
-	)
+  # tags = merge (
+	# 	{
+	# 	Name = join("-", [var.tname,"system","eks","network",var.nat_tags,element(var.azs,count.index)])
+	# 	},
+	# )
 }
 
 

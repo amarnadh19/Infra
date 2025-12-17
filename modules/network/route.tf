@@ -4,21 +4,21 @@ resource "aws_route_table" "publicRT" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.mainigw.id
   }
-  tags = merge (
-		{
-		Name   = "${var.tname}-${var.tier}-eks-publicRT"
-	},
-	)
+  # tags = merge (
+	# 	{
+	# 	Name   = "${var.tname}-${var.tier}-eks-publicRT"
+	# },
+	# )
 }
 
 
 resource "aws_route_table" "privateRT" {
   vpc_id = aws_vpc.mainvpc.id
-  tags = merge (
-		{
-		Name   = "${var.tname}-${var.tier}-eks-privateRT"
-	},
-	)
+  # tags = merge (
+	# 	{
+	# 	Name   = "${var.tname}-${var.tier}-eks-privateRT"
+	# },
+	# )
 }
 
 resource "aws_route_table_association" "publicRTA" {
