@@ -13,3 +13,17 @@ module "eks_sg" {
   default_route_cidr = "0.0.0.0/0"
   vpc_id = ""
 }
+
+module "eks_cluster" {
+  source = "../../../modules/eks"
+  cluster_name = "my_cluster"
+  node_group_name = "node_group_managed"
+  subnet_ids = ""
+  nodegroup_instance_types = "t3.medium"
+  release_version = ""
+  max_size = 3
+  min_size = 1
+  desired_size = 2
+  endpoint_public_access = true
+  endpoint_private_access = true
+}

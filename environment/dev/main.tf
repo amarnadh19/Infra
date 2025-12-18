@@ -5,3 +5,7 @@ module "dev_ecr_repo" {
 module "dev_vpc" {
     source = "./common"
 }
+
+module "dev_cluster" {
+    source = "./ekscluster"
+}
