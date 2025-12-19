@@ -80,11 +80,16 @@ resource "aws_route_table_association" "privateRTA" {
 }
 # Public Subnets
 resource "aws_subnet" "public" {
-  count                   = 2
+  count                   = length(var.public_subnets)
   vpc_id                  = aws_vpc.mainvpc.id
   cidr_block              = var.public_subnets[count.index]
   map_public_ip_on_launch = true
   availability_zone       = var.azs[count.index]
+  tags = {
+     Name                                ="public_subnets[count.index]"
+    "kubernetes.io/role/elb"            = "1"          # <--- Crucial for Public ALBs
+    "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"     # <--- Helps EKS identify the VPC
+  }
   # tags                    =  merge (
 	#  	{
 	#    		Name = join("-", [var.tname,"system","eks","network",var.public_subnet_tags,element(var.azs,count.index)])
@@ -94,10 +99,15 @@ resource "aws_subnet" "public" {
 
 # Private Subnets
 resource "aws_subnet" "private" {
-  count             = 2
+  count             = length(var.private_subnets)
   vpc_id            = aws_vpc.mainvpc.id
   cidr_block        = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
+  tags = {
+    Name                                ="private_subnets[count.index]"
+    "kubernetes.io/role/internal-elb"   = "1"          # <--- Crucial for Internal ALBs
+    "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"
+  }
   # tags              = merge (
 	# 	{
 	# 		Name = join("-", [var.tname,"system","eks","network",var.private_subnet_tags,element(var.azs,count.index)])

@@ -194,12 +194,12 @@ resource "aws_iam_role_policy_attachment" "test_attach" {
 
 # Fetch cluster details
 data "aws_eks_cluster" "eks" {
-  name = var.cluster_name
+  name = aws_eks_cluster.cluster.id
   depends_on = [ aws_eks_cluster.cluster ]
 }
 
 data "aws_eks_cluster_auth" "eks" {
-  name = var.cluster_name
+  name = aws_eks_cluster.cluster.id
   depends_on = [ aws_eks_cluster.cluster ]
 }
 
@@ -220,10 +220,3 @@ resource "kubernetes_service_account_v1" "test_sa" {
   }
 }
 
-provider "helm" {
-  kubernetes {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
-  }
-}

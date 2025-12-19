@@ -22,3 +22,14 @@ module "eks" {
   endpoint_public_access = true
   endpoint_private_access = true
 }
+
+
+#
+#module "app_deployment" {
+#  source       = "../../modules/app_deployment"
+#  ecr_repo_url = module.ecr.repository_url
+#  image_tag    = "v1.0.0"
+#
+#  # Wait for EKS to be fully active before deploying
+#  depends_on = [module.eks]
+#}

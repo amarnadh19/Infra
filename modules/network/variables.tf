@@ -1,13 +1,13 @@
 variable "vpcname" {
 	description = "Provide a vpc name"
-	#default = ""
-	default = "testing"
+	default = ""
+	#default = "testing"
 }
 
 variable "private_subnets" {
 	type = list(string)
-	#default = []
-    default = ["10.0.10.0/24","10.0.11.0/24"]
+	default = []
+    #default = ["10.0.10.0/24","10.0.11.0/24"]
 	description = "List of private subnets"
 }
 
@@ -28,8 +28,8 @@ variable "env" {
 
 variable "cidrblock" {
 	type    = string
-    #default = ""
-	default = "10.0.0.0/16"
+    default = ""
+	#default = "10.0.0.0/16"
 
 }
 
@@ -40,8 +40,8 @@ variable "create_vpc" {
 
 variable "public_subnets" {
 	type = list(string)
-	default = ["10.0.1.0/24","10.0.2.0/24"]
-	#default = []
+	#default = ["10.0.1.0/24","10.0.2.0/24"]
+	default = []
 }
 
 variable "map_public_ip_on_launch" {
@@ -51,8 +51,8 @@ variable "map_public_ip_on_launch" {
 
 variable "azs" {
 	type = list(string)
-	#default = []
-	default = ["ap-south-1a","ap-south-1b"]
+	default = []
+	#default = ["ap-south-1a","ap-south-1b"]
 }
 
 variable "enable_nat_gateway" {
@@ -130,5 +130,5 @@ variable "orgShortName" {
 
 variable "aws_region" {
   type    =  string
-  default = "ap-south-1"
+  #default = "ap-south-1"
 }
