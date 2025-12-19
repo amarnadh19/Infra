@@ -1,3 +1,5 @@
 terraform.exe*
 .terraform
 *.terraform.*
+*.idea
+terraform.tfstate*
