@@ -29,6 +29,26 @@ resource "aws_iam_role_policy_attachment" "node_policies" {
   policy_arn = each.value
   role       = aws_iam_role.eks_nodes.name
 }
+###############################
+#Launch Template for Node
+###########################
+
+resource "aws_launch_template" "node_group_template" {
+  name_prefix = "${var.cluster_name}-nodes"
+
+  # This is where we attach your security group
+  vpc_security_group_ids = var.additional_node_sg_ids
+
+  # Mandatory for EKS: Ensure the nodes can still be managed
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      Name = "${var.cluster_name}-node"
+    }
+  }
+}
+
+
 
 #############################
 ##### Node group
@@ -52,7 +72,12 @@ resource "aws_eks_node_group" "node" {
     max_size     = var.max_size
     min_size     = var.min_size
   }
-
+  ##################
+  launch_template {
+    id      = aws_launch_template.node_group_template.id
+    version = aws_launch_template.node_group_template.default_version
+  }
+###################
   depends_on = [
     aws_iam_role_policy_attachment.node_policies
   ]

@@ -38,3 +38,12 @@ output "cluster_endpoint" {
   value       = aws_eks_cluster.cluster.endpoint
 }
 
+###############
+
+output "cluster_security_group_id" {
+  description = "The security group ID created by the EKS cluster control plane"
+  # This pulls the ID automatically created by AWS for the cluster
+  value = aws_eks_cluster.cluster.vpc_config[0].cluster_security_group_id
+}
+
+############

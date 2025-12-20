@@ -88,7 +88,7 @@ resource "aws_subnet" "public" {
   tags = {
      Name                                ="public_subnets[${count.index}]" ##${var.subnet_names[count.index]}-subnet
     "kubernetes.io/role/elb"            = "1"          # <--- Crucial for Public ALBs
-    "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"     # <--- Helps EKS identify the VPC
+    ("kubernetes.io/cluster/${var.cluster_name}") = "shared"     # <--- Helps EKS identify the VPC
   }
   # tags                    =  merge (
 	#  	{
@@ -106,7 +106,7 @@ resource "aws_subnet" "private" {
   tags = {
     Name                                ="private_subnets[${count.index}]"
     "kubernetes.io/role/internal-elb"   = "1"          # <--- Crucial for Internal ALBs
-    "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"
+    ("kubernetes.io/cluster/${var.cluster_name}") = "shared"
   }
   # tags              = merge (
 	# 	{

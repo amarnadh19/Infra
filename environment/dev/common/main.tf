@@ -17,4 +17,5 @@ module "vpc" {
 	map_public_ip_on_launch = true
 
 	aws_region            = ""
+	cluster_name          = var.cluster_name
 }

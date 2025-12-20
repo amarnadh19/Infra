@@ -15,7 +15,13 @@ variable "node_group_name" {
   description = "Name of the managed node group"
   #default = "test-managed"
 }
-
+#############
+variable "additional_node_sg_ids" {
+  description = "List of additional security group IDs to attach to the nodes"
+  type        = list(string)
+  default     = []
+}
+##################
 variable "subnet_ids" {
   type        = list(string)
   description = "List of private subnet IDs where nodes will be launched"

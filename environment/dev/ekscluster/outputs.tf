@@ -33,4 +33,16 @@
    value       = module.eks.cluster_endpoint
  }
 
+###### SG OUTPUTS
+
+output "node_security_group_id" {
+  description = "The ID of the security group created for EKS"
+  value       = module.eks_sg.sg_id
+}
+
+output "eks_sg_name" {
+  description = "The name of the security group"
+  value       = module.eks_sg.sg_name
+}
+
 
