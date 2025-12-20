@@ -3,4 +3,3 @@ terraform.exe*
 *.terraform.*
 *.idea
 terraform.tfstate*
-.helmignore

@@ -86,7 +86,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
   availability_zone       = var.azs[count.index]
   tags = {
-     Name                                ="public_subnets[count.index]"
+     Name                                ="public_subnets[${count.index}]" ##${var.subnet_names[count.index]}-subnet
     "kubernetes.io/role/elb"            = "1"          # <--- Crucial for Public ALBs
     "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"     # <--- Helps EKS identify the VPC
   }
@@ -104,7 +104,7 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
-    Name                                ="private_subnets[count.index]"
+    Name                                ="private_subnets[${count.index}]"
     "kubernetes.io/role/internal-elb"   = "1"          # <--- Crucial for Internal ALBs
     "kubernetes.io/cluster/aws_eks_cluster.cluster.name" = "shared"
   }

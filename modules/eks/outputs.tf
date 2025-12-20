@@ -23,15 +23,6 @@ output "node_group_resources" {
   value       = aws_eks_node_group.node.resources
 }
 
-output "oidc_provider_arn" {
-  description = "The ARN of the OIDC Provider"
-  value       = aws_iam_openid_connect_provider.eks.arn
-}
-
-output "oidc_provider_url" {
-  description = "The URL of the OIDC Provider"
-  value       = aws_iam_openid_connect_provider.eks.url
-}
 
 output "cluster_name" {
   description = "The name of the EKS cluster"
@@ -47,7 +38,3 @@ output "cluster_endpoint" {
   value       = aws_eks_cluster.cluster.endpoint
 }
 
-output "cluster_certificate_authority_data" {
-  description = "Base64 encoded certificate data required to communicate with the cluster"
-  value       = aws_eks_cluster.cluster.certificate_authority[0].data
-}

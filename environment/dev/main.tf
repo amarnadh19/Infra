@@ -9,5 +9,5 @@ module "dev_vpc" {
 module "dev_cluster" {
     source = "./ekscluster"
     vpc_id = module.dev_vpc.vpc_id
-    subnet_ids = module.dev_vpc.private_subnets
+    subnet_ids = module.dev_vpc.public_subnets ## adding public subnets for testing
 }
